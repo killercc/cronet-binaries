@@ -78,19 +78,6 @@ jobs:
             curl -LO https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-win.zip
             unzip ninja-win.zip -d ~/bin
           fi
-  cache-toolchains-mac:
-    runs-on: macos-11
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
-        with:
-          path: |
-            src/third_party/llvm-build/Release+Asserts/
-            src/chrome/build/pgo_profiles/chrome-mac-*
-            src/gn/
-          key: toolchains-pgo-mac-${{ hashFiles('CHROMIUM_VERSION') }}-v${{ env.CACHE_EPOCH }}
-      - run: EXTRA_FLAGS='target_cpu="x64"' ./get-clang.sh
-      - run: EXTRA_FLAGS='target_cpu="arm64"' ./get-clang.sh
   linux:
     needs: cache-toolchains-posix
     runs-on: ubuntu-20.04
