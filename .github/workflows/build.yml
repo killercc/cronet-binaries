@@ -1,6 +1,5 @@
 name: Build
 on:
-  workflow_dispatch:
   push:
     branches: [main]
     paths-ignore: [README.md]
@@ -17,7 +16,7 @@ env:
   SCCACHE_CACHE_SIZE: 200M
 jobs:
   cache-toolchains-posix:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Cache toolchains (Linux, OpenWrt, Android)
