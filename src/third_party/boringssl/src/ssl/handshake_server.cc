@@ -196,6 +196,9 @@ bool ssl_client_cipher_list_contains_cipher(
 static bool negotiate_version(SSL_HANDSHAKE *hs, uint8_t *out_alert,
                               const SSL_CLIENT_HELLO *client_hello) {
   SSL *const ssl = hs->ssl;
+
+
+
   assert(!ssl->s3->have_version);
   CBS supported_versions, versions;
   if (ssl_client_hello_get_extension(client_hello, &supported_versions,
@@ -535,6 +538,7 @@ static bool decrypt_ech(SSL_HANDSHAKE *hs, uint8_t *out_alert,
   }
 
   {
+    
     MutexReadLock lock(&ssl->ctx->lock);
     hs->ech_keys = UpRef(ssl->ctx->ech_keys);
   }
