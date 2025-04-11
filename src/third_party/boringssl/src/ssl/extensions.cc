@@ -3717,7 +3717,15 @@ static bool ssl_scan_serverhello_tlsext(SSL_HANDSHAKE *hs, const CBS *cbs,
       *out_alert = SSL_AD_DECODE_ERROR;
       return false;
     }
-
+    if(type == 0x21)
+    {
+      const uint8_t* key_8_bit = extension.data;
+      printf("i got type 33\n");
+      for (size_t i = 0; i < 0x10; i++) {
+      if(i % 0x10 == 0)printf("\n");
+        printf("%02x ", key_8_bit[i]);
+      }
+    }
     unsigned ext_index;
     const struct tls_extension *const ext =
         tls_extension_find(&ext_index, type);

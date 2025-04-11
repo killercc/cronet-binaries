@@ -690,6 +690,7 @@ bool ssl_parse_server_hello(ParsedServerHello *out, uint8_t *out_alert,
     *out_alert = SSL_AD_DECODE_ERROR;
     return false;
   }
+  
   return true;
 }
 
